@@ -5,10 +5,13 @@ import Header from '../atoms/Header';
 type Movie = {
   Title: string;
   Year: string;
+  Type: string;
+  imdbID: string;
+  Poster: string;
 };
 
 const MovieList: VFC = memo(() => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [movies, setMovies] = useState<Array<Movie>>([]);
 
   useEffect(() => {
@@ -34,7 +37,12 @@ const MovieList: VFC = memo(() => {
       {loading ? (
         <p>Now Loading</p>
       ) : (
-        movies.map((movie) => <p>{movie.Title}</p>)
+        movies.map((movie) => (
+          <div>
+            <p>{movie.Title}</p>
+            <img src={movie.Poster} alt="ポスター" />
+          </div>
+        ))
       )}
     </>
   );

@@ -19,11 +19,7 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module',
   },
-  plugins: [
-    'react',
-    '@typescript-eslint',
-    'prettier'
-  ],
+  plugins: ['react', '@typescript-eslint', 'prettier'],
   rules: {
     // ↓↓↓ADD↓↓↓
     'no-use-before-define': 'off',
@@ -48,4 +44,4 @@ module.exports = {
     },
   },
   // ↑↑↑ADD↑↑↑
-}
+};
