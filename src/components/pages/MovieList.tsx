@@ -1,14 +1,18 @@
 import React, { memo, VFC, useState, useEffect } from 'react';
+import styled from 'styled-components';
 
 import Header from '../atoms/Header';
+import { Movie } from '../../types/api/movie';
+import MovieCard from '../organisms/MovieCard';
 
-type Movie = {
-  Title: string;
-  Year: string;
-  Type: string;
-  imdbID: string;
-  Poster: string;
-};
+const SMovieArea = styled.div`
+  text-align: center;
+  padding-top: 40px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-gap: 20px;
+`;
 
 const MovieList: VFC = memo(() => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -37,12 +41,16 @@ const MovieList: VFC = memo(() => {
       {loading ? (
         <p>Now Loading</p>
       ) : (
-        movies.map((movie) => (
-          <div>
-            <p>{movie.Title}</p>
-            <img src={movie.Poster} alt="ポスター" />
-          </div>
-        ))
+        <SMovieArea>
+          {movies.map((movie) => (
+            <MovieCard
+              key={movie.imdbID}
+              title={movie.Title}
+              posterUrl={movie.Poster}
+              year={movie.Year}
+            />
+          ))}
+        </SMovieArea>
       )}
     </>
   );
