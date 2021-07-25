@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Header from '../atoms/Header';
 import { Movie } from '../../types/api/movie';
 import MovieCard from '../organisms/MovieCard';
+import SearchInput from '../molecules/SearchInput';
 
 const SMovieArea = styled.div`
   text-align: center;
@@ -38,6 +39,7 @@ const MovieList: VFC = memo(() => {
   return (
     <>
       <Header />
+      <SearchInput />
       {loading ? (
         <p>Now Loading</p>
       ) : (
