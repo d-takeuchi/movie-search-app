@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const SHeader = styled.header`
   height: 100px;
   display: flex;
-  color: #fffffe;
+  color: #272343;
   justify-content: center;
   align-items: center;
 `;
@@ -12,7 +12,7 @@ const SHeader = styled.header`
 const Header: VFC = memo(() => {
   return (
     <SHeader>
-      <h1>映画検索アプリ</h1>
+      <h1>Movie Search App</h1>
     </SHeader>
   );
 });

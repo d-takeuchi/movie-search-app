@@ -16,8 +16,8 @@ const MovieCard: VFC<Props> = memo((props) => {
   return (
     <SMovieCard>
       <img src={posterUrl} alt="ポスター" />
-      <p style={{ color: 'white' }}>{title}</p>
-      <p style={{ color: 'white' }}>{year}</p>
+      <p style={{ color: '#272343' }}>{title}</p>
+      <p style={{ color: '#272343' }}>{year}</p>
     </SMovieCard>
   );
 });

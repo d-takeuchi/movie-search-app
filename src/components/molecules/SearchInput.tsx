@@ -1,4 +1,4 @@
-import React, { VFC, memo, useContext } from 'react';
+import React, { VFC, memo, useContext, ChangeEvent } from 'react';
 
 import styled from 'styled-components';
 import { SearchContext } from '../../providers/SearchProvider';
@@ -20,24 +20,32 @@ const SButton = styled.button`
   border-radius: 10px;
   border: none;
   margin-left: 10px;
-  background: #f9bc60;
+  background: #ffd803;
+  &:hover {
+    opacity: 0.8;
+  }
 `;
 
-const SearchInput: VFC = memo(() => {
+type Props = {
+  fetchMovies: () => void;
+};
+
+const SearchInput: VFC<Props> = memo((props) => {
+  const { fetchMovies } = props;
   const { searchMovieTitle, setSearchMovieTitle } = useContext(SearchContext);
 
-  const onChangeSearchInput = (event: any) => {
+  const onChangeSearchInput = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchMovieTitle(event.target.value);
   };
 
   return (
     <SContainer>
       <SInput
-        placeholder="映画タイトルを入力してください"
+        placeholder="movie title"
         value={searchMovieTitle}
         onChange={onChangeSearchInput}
       />
-      <SButton>検索</SButton>
+      <SButton onClick={fetchMovies}>search</SButton>
     </SContainer>
   );
 });

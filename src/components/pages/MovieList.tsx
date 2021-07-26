@@ -1,10 +1,10 @@
-import React, { memo, VFC, useState, useEffect } from 'react';
+import React, { memo, VFC } from 'react';
 import styled from 'styled-components';
 
 import Header from '../atoms/Header';
-import { Movie } from '../../types/api/movie';
 import MovieCard from '../organisms/MovieCard';
 import SearchInput from '../molecules/SearchInput';
+import useMovieSearch from '../../hooks/useMovieSearch';
 
 const SMovieArea = styled.div`
   text-align: center;
@@ -15,33 +15,21 @@ const SMovieArea = styled.div`
   grid-gap: 20px;
 `;
 
-const MovieList: VFC = memo(() => {
-  const [loading, setLoading] = useState<boolean>(false);
-  const [movies, setMovies] = useState<Array<Movie>>([]);
+const SLoading = styled.p`
+  text-align: center;
+  font-size: 5rem;
+  color: #272343;
+`;
 
-  useEffect(() => {
-    setLoading(true);
-    fetch('http://www.omdbapi.com/?s=iron&apikey=d862db0')
-      .then((response) => {
-        return response.json();
-      })
-      .then((responseJson) => {
-        setMovies(responseJson.Search);
-      })
-      .catch(() => {
-        // console.log('エラーです');
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
+const MovieList: VFC = memo(() => {
+  const { loading, movies, fetchMovies } = useMovieSearch();
 
   return (
     <>
       <Header />
-      <SearchInput />
+      <SearchInput fetchMovies={fetchMovies} />
       {loading ? (
-        <p>Now Loading</p>
+        <SLoading>Now Loading</SLoading>
       ) : (
         <SMovieArea>
           {movies.map((movie) => (
